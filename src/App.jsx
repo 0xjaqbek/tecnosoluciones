@@ -532,53 +532,54 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // Create an intersection observer to watch the footer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // If footer is intersecting with the top part of viewport (where header is)
-          if (entry.isIntersecting) {
-            // Check if the footer has reached the header area (top 80px of viewport)
-            const footerRect = entry.boundingClientRect;
-            const headerHeight = 80; // Approximate header height
-            
-            // If footer's top is within the header area
-            if (footerRect.top <= headerHeight) {
-              setIsOverDarkSection(true);
-            } else {
-              setIsOverDarkSection(false);
-            }
-          } else {
-            setIsOverDarkSection(false);
-          }
+          // Simple logic: if footer is visible in viewport, change color
+          setIsOverDarkSection(entry.isIntersecting);
         });
       },
       {
-        // Watch for intersection with the top portion of the viewport where header sits
-        rootMargin: '-60px 0px 0px 0px',
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5]
+        // Trigger when footer becomes visible at the top of the viewport
+        rootMargin: '0px 0px -90% 0px',
+        threshold: 0
       }
     );
 
-    // Function to find and observe the footer
-    const observeFooter = () => {
-      // Look for footer element by tag name
+    // Wait for DOM to be ready and find footer
+    const findAndObserveFooter = () => {
       const footer = document.querySelector('footer');
       if (footer) {
         observer.observe(footer);
-        return footer;
+        console.log('Footer found and observed'); // Debug log
+        return true;
       }
-      return null;
+      return false;
     };
 
-    // Initial observation
-    let footerElement = observeFooter();
-
-    // If footer not found initially, try again after a short delay (for dynamic content)
-    if (!footerElement) {
+    // Try immediately
+    if (!findAndObserveFooter()) {
+      // If not found, try after DOM is ready
       const timeout = setTimeout(() => {
-        footerElement = observeFooter();
-      }, 100);
+        if (!findAndObserveFooter()) {
+          console.log('Footer not found, falling back to scroll detection'); // Debug log
+          
+          // Fallback to scroll-based detection
+          const handleScroll = () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const threshold = documentHeight * 0.85; // Last 15% of page
+            
+            setIsOverDarkSection(scrollPosition > threshold);
+          };
+
+          window.addEventListener('scroll', handleScroll);
+          
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+        }
+      }, 500);
 
       return () => {
         clearTimeout(timeout);
@@ -586,7 +587,6 @@ const Header = () => {
       };
     }
 
-    // Cleanup function
     return () => {
       observer.disconnect();
     };
@@ -611,7 +611,7 @@ const Header = () => {
               </div>
               <span 
                 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                style={{ fontFamily: 'Contrail One' }}
+                style={{ fontFamily: 'Contrail One, cursive' }}
               >
                 TecnoSoluciones
               </span>
