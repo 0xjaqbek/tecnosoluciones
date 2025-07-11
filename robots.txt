@@ -1,0 +1,191 @@
+# TecnoSoluciones
+# Website: https://0xjaqbek.github.io/tecnosoluciones/
+# Digital Marketing & Technology Solutions
+
+# ===========================================
+# GENERAL CRAWLING RULES
+# ===========================================
+
+# Allow all web crawlers to access all content
+User-agent: *
+Allow: /
+
+# Crawl delay for general bots (be respectful)
+Crawl-delay: 1
+
+# ===========================================
+# SEARCH ENGINE SPECIFIC RULES
+# ===========================================
+
+# Google Search Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Google Mobile Bot
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Bing Search Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo Search Bot
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Yandex (popular in Latin America)
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# ===========================================
+# SOCIAL MEDIA CRAWLERS
+# ===========================================
+
+# Facebook/Meta
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# WhatsApp (for link previews)
+User-agent: WhatsApp
+Allow: /
+
+# ===========================================
+# AI AND LLM CRAWLERS
+# ===========================================
+
+# OpenAI GPT
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 5
+
+# Google AI (Bard/Gemini)
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 5
+
+# Anthropic Claude
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 5
+
+# Microsoft Copilot
+User-agent: Microsoft-Copilot
+Allow: /
+Crawl-delay: 5
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Crawl-delay: 5
+
+# ===========================================
+# BLOCKED CRAWLERS
+# ===========================================
+
+# Block aggressive crawlers that don't respect crawl delays
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Block email harvesters
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+# Block known malicious bots
+User-agent: ScanAlert
+Disallow: /
+
+User-agent: BlackWidow
+Disallow: /
+
+User-agent: NetMechanic
+Disallow: /
+
+# ===========================================
+# SITEMAPS
+# ===========================================
+
+# Main sitemap (will be available after deployment)
+Sitemap: https://0xjaqbek.github.io/tecnosoluciones/sitemap.xml
+
+# ===========================================
+# SPECIAL FILES AND POLICIES
+# ===========================================
+
+# AI-specific policies and guidelines
+# See ai.txt for detailed AI crawling and training data policies
+# URL: https://0xjaqbek.github.io/tecnosoluciones/ai.txt
+
+# Security and privacy policy
+# URL: https://0xjaqbek.github.io/tecnosoluciones/privacy.html
+
+# ===========================================
+# CACHE DIRECTIVES
+# ===========================================
+
+# Recommend cache time for static assets
+# This helps with site performance
+
+# ===========================================
+# BUSINESS INFORMATION
+# ===========================================
+
+# TecnoSoluciones - Digital Marketing Specialists
+# Services: Marketing Digital, Soporte Técnico, Inteligencia Artificial
+# Experience: 20+ years in technology solutions
+# Location: Argentina
+# Contact: tecnosolucionesuno@gmail.com
+# WhatsApp: +54 11 3422 7461
+
+# ===========================================
+# NOTES FOR CRAWLERS
+# ===========================================
+
+# This website features:
+# - React SPA (Single Page Application)
+# - Dynamic 3D content (Three.js)
+# - Progressive enhancement
+# - Mobile-responsive design
+# - Spanish language content
+# - Business services in Argentina
+
+# Best crawling practices for this site:
+# - Allow JavaScript execution for full content
+# - Respect crawl delays to avoid server load
+# - Check ai.txt for AI-specific guidelines
+# - Content is primarily in Spanish (Argentina)
+
+# Last updated: 2025
+# Version: 1.0
