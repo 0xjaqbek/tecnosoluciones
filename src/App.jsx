@@ -25,6 +25,12 @@ const initGoogleAnalytics = () => {
   script1.src = 'https://www.googletagmanager.com/gtag/js?id=AW-1029418216';
   document.head.appendChild(script1);
 
+  // Add Google Font for Contrail One
+  const fontLink = document.createElement('link');
+  fontLink.href = 'https://fonts.googleapis.com/css2?family=Contrail+One&display=swap';
+  fontLink.rel = 'stylesheet';
+  document.head.appendChild(fontLink);
+
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     window.dataLayer.push(arguments);
@@ -42,6 +48,7 @@ const TechLandscape = () => {
   const animationRef = useRef(null);
 
   useEffect(() => {
+    console.log('TechLandscape mounting...', mountRef.current); // DEBUG LOG
     if (!mountRef.current) return;
 
     // Scene setup
@@ -444,7 +451,10 @@ const Header = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span 
+                className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                style={{ fontFamily: 'Contrail One, cursive' }}
+              >
                 TecnoSoluciones
               </span>
             </div>
@@ -793,7 +803,12 @@ const Footer = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold">TecnoSoluciones</span>
+              <span 
+                className="text-xl font-bold"
+                style={{ fontFamily: 'Contrail One, cursive' }}
+              >
+                TecnoSoluciones
+              </span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
               Transformando negocios desde 2004 con soluciones tecnológicas innovadoras y marketing digital efectivo.
