@@ -523,12 +523,37 @@ const NetworkVisualization = () => {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOverDarkSection, setIsOverDarkSection] = useState(false);
 
   const handleWhatsAppClick = () => {
     if (window.gtag) {
       window.gtag('event', 'conversion', {'send_to': 'AW-1029418216/rcu4CPmQ2O0aEOjZ7uoD'});
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Calculate if we're in the footer area (last 20% of the page)
+      const footerThreshold = documentHeight - windowHeight * 1.2;
+      
+      setIsOverDarkSection(scrollY > footerThreshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const emailTextClass = isOverDarkSection 
+    ? "text-white transition-colors duration-300" 
+    : "text-gray-700 transition-colors duration-300";
+
+  const menuButtonClass = isOverDarkSection
+    ? "text-white hover:text-gray-200 transition-colors duration-300"
+    : "text-gray-700 hover:text-gray-900 transition-colors duration-300";
 
   return (
     <header className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-xl border-b border-white/20">
@@ -549,7 +574,7 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-6">
-            <div className="flex items-center space-x-2 text-gray-700">
+            <div className={`flex items-center space-x-2 ${emailTextClass}`}>
               <Mail className="w-4 h-4" />
               <span className="text-sm">tecnosolucionesuno@gmail.com</span>
             </div>
@@ -568,7 +593,7 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-gray-900"
+              className={menuButtonClass}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -578,7 +603,7 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-white/20">
             <div className="flex flex-col space-y-4">
-              <div className="flex items-center space-x-2 text-gray-700">
+              <div className={`flex items-center space-x-2 ${emailTextClass}`}>
                 <Mail className="w-4 h-4" />
                 <span className="text-sm">tecnosolucionesuno@gmail.com</span>
               </div>
