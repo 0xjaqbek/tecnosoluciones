@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import * as THREE from 'three';
 import { 
   MessageCircle, 
   Mail, 
@@ -31,6 +32,408 @@ const initGoogleAnalytics = () => {
   gtag('js', new Date());
   gtag('config', 'AW-1029418216');
   window.gtag = gtag;
+};
+
+// 3D Tech Landscape Component
+const TechLandscape = () => {
+  const mountRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+      console.log('3D Component mounting landscape...', mountRef.current);
+  
+  if (!mountRef.current) {
+    console.log('No mount ref found');
+    return;
+  }
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+    mountRef.current.appendChild(renderer.domElement);
+
+    sceneRef.current = scene;
+    rendererRef.current = renderer;
+
+    // Create grid lines (subtle wireframe ground)
+    const gridGroup = new THREE.Group();
+    const gridMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x667eea, 
+      transparent: true, 
+      opacity: 0.1 
+    });
+
+    // Horizontal lines
+    for (let i = -10; i <= 10; i += 2) {
+      const geometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-10, -2, i),
+        new THREE.Vector3(10, -2, i)
+      ]);
+      const line = new THREE.Line(geometry, gridMaterial);
+      gridGroup.add(line);
+    }
+
+    // Vertical lines
+    for (let i = -10; i <= 10; i += 2) {
+      const geometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(i, -2, -10),
+        new THREE.Vector3(i, -2, 10)
+      ]);
+      const line = new THREE.Line(geometry, gridMaterial);
+      gridGroup.add(line);
+    }
+
+    scene.add(gridGroup);
+
+    // Create floating geometric shapes
+    const shapes = [];
+    const shapeGeometries = [
+      new THREE.BoxGeometry(0.2, 0.2, 0.2),
+      new THREE.OctahedronGeometry(0.15),
+      new THREE.TetrahedronGeometry(0.18)
+    ];
+
+    const shapeMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x764ba2, 
+      transparent: true, 
+      opacity: 0.15,
+      wireframe: true
+    });
+
+    for (let i = 0; i < 15; i++) {
+      const geometry = shapeGeometries[Math.floor(Math.random() * shapeGeometries.length)];
+      const shape = new THREE.Mesh(geometry, shapeMaterial);
+      
+      shape.position.x = (Math.random() - 0.5) * 20;
+      shape.position.y = Math.random() * 5 - 1;
+      shape.position.z = (Math.random() - 0.5) * 20;
+      
+      shape.userData = {
+        originalPosition: shape.position.clone(),
+        rotationSpeed: {
+          x: (Math.random() - 0.5) * 0.02,
+          y: (Math.random() - 0.5) * 0.02,
+          z: (Math.random() - 0.5) * 0.02
+        },
+        floatPhase: Math.random() * Math.PI * 2
+      };
+      
+      scene.add(shape);
+      shapes.push(shape);
+    }
+
+    // Create data streams (moving particles)
+    const particleGeometry = new THREE.BufferGeometry();
+    const particleCount = 50;
+    const positions = new Float32Array(particleCount * 3);
+    const velocities = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 1] = Math.random() * 3;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+
+      velocities.push({
+        x: (Math.random() - 0.5) * 0.02,
+        y: (Math.random() - 0.5) * 0.01,
+        z: (Math.random() - 0.5) * 0.02
+      });
+    }
+
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const particleMaterial = new THREE.PointsMaterial({
+      color: 0x667eea,
+      size: 0.05,
+      transparent: true,
+      opacity: 0.6
+    });
+
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particles);
+
+    // Position camera
+    camera.position.set(0, 3, 8);
+    camera.lookAt(0, 0, 0);
+
+    // Animation loop
+    const animate = () => {
+      const time = Date.now() * 0.001;
+
+      // Animate grid (subtle wave effect)
+      gridGroup.rotation.y = time * 0.05;
+      gridGroup.position.y = Math.sin(time * 0.5) * 0.1 - 2;
+
+      // Animate floating shapes
+      shapes.forEach((shape) => {
+        // Rotation
+        shape.rotation.x += shape.userData.rotationSpeed.x;
+        shape.rotation.y += shape.userData.rotationSpeed.y;
+        shape.rotation.z += shape.userData.rotationSpeed.z;
+
+        // Floating movement
+        shape.position.y = shape.userData.originalPosition.y + Math.sin(time + shape.userData.floatPhase) * 0.3;
+      });
+
+      // Animate particles
+      const positions = particles.geometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] += velocities[i].x;
+        positions[i * 3 + 1] += velocities[i].y;
+        positions[i * 3 + 2] += velocities[i].z;
+
+        // Reset particles that go too far
+        if (Math.abs(positions[i * 3]) > 10) positions[i * 3] *= -1;
+        if (Math.abs(positions[i * 3 + 2]) > 10) positions[i * 3 + 2] *= -1;
+        if (positions[i * 3 + 1] > 5) positions[i * 3 + 1] = -2;
+        if (positions[i * 3 + 1] < -3) positions[i * 3 + 1] = 5;
+      }
+      particles.geometry.attributes.position.needsUpdate = true;
+
+      // Gentle camera movement
+      camera.position.y = 3 + Math.sin(time * 0.3) * 0.2;
+      camera.lookAt(0, Math.sin(time * 0.2) * 0.1, 0);
+
+      renderer.render(scene, camera);
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Handle resize
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      if (mountRef.current && renderer.domElement) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
+    };
+  }, []);
+
+  return (
+    <div 
+      ref={mountRef} 
+      className="fixed inset-0 z-0"
+      style={{ 
+        pointerEvents: 'none',
+        opacity: 0.3
+      }} 
+    />
+  );
+};
+
+// 3D Network Visualization Component
+const NetworkVisualization = () => {
+  const mountRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+      console.log('3D Component mounting 3d network...', mountRef.current);
+  
+  if (!mountRef.current) {
+    console.log('No mount ref found');
+    return;
+  }
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+    mountRef.current.appendChild(renderer.domElement);
+
+    sceneRef.current = scene;
+    rendererRef.current = renderer;
+
+    // Create network nodes
+    const nodes = [];
+    const connections = [];
+    const nodeCount = 25;
+
+    // Node geometry and materials
+    const nodeGeometry = new THREE.SphereGeometry(0.03, 16, 16);
+    const nodeMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x667eea,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const pulseNodeMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x764ba2,
+      transparent: true,
+      opacity: 1
+    });
+
+    // Create nodes in 3D space
+    for (let i = 0; i < nodeCount; i++) {
+      const node = new THREE.Mesh(
+        nodeGeometry, 
+        Math.random() > 0.8 ? pulseNodeMaterial : nodeMaterial
+      );
+      
+      // Position nodes in a more structured but organic way
+      const radius = 3 + Math.random() * 4;
+      const theta = (i / nodeCount) * Math.PI * 2 + Math.random() * 0.5;
+      const phi = Math.random() * Math.PI;
+      
+      node.position.x = radius * Math.sin(phi) * Math.cos(theta);
+      node.position.y = radius * Math.sin(phi) * Math.sin(theta);
+      node.position.z = radius * Math.cos(phi);
+      
+      node.userData = {
+        originalPosition: node.position.clone(),
+        pulsePhase: Math.random() * Math.PI * 2,
+        isPulse: node.material === pulseNodeMaterial
+      };
+      
+      scene.add(node);
+      nodes.push(node);
+    }
+
+    // Create connections between nearby nodes
+    const lineMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x667eea, 
+      transparent: true, 
+      opacity: 0.3 
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const distance = nodes[i].position.distanceTo(nodes[j].position);
+        if (distance < 2.5 && Math.random() > 0.7) {
+          const geometry = new THREE.BufferGeometry().setFromPoints([
+            nodes[i].position,
+            nodes[j].position
+          ]);
+          const line = new THREE.Line(geometry, lineMaterial);
+          scene.add(line);
+          connections.push({
+            line,
+            nodeA: nodes[i],
+            nodeB: nodes[j],
+            pulsePhase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+    }
+
+    // Position camera
+    camera.position.z = 8;
+    camera.position.y = 1;
+
+    // Mouse interaction
+    const mouse = new THREE.Vector2();
+    const handleMouseMove = (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Animation loop
+    const animate = () => {
+      const time = Date.now() * 0.001;
+
+      // Rotate the entire network slowly
+      scene.rotation.y = time * 0.1;
+      scene.rotation.x = Math.sin(time * 0.05) * 0.1;
+
+      // Animate nodes
+      nodes.forEach((node, index) => {
+        // Gentle floating animation
+        node.position.y = node.userData.originalPosition.y + Math.sin(time + index) * 0.1;
+        node.position.x = node.userData.originalPosition.x + Math.cos(time + index * 0.5) * 0.05;
+        
+        // Pulse effect for special nodes
+        if (node.userData.isPulse) {
+          const pulseScale = 1 + Math.sin(time * 3 + node.userData.pulsePhase) * 0.3;
+          node.scale.setScalar(pulseScale);
+          node.material.opacity = 0.7 + Math.sin(time * 2 + node.userData.pulsePhase) * 0.3;
+        }
+      });
+
+      // Update connections
+      connections.forEach(connection => {
+        const { line, nodeA, nodeB } = connection;
+        const positions = line.geometry.attributes.position.array;
+        positions[0] = nodeA.position.x;
+        positions[1] = nodeA.position.y;
+        positions[2] = nodeA.position.z;
+        positions[3] = nodeB.position.x;
+        positions[4] = nodeB.position.y;
+        positions[5] = nodeB.position.z;
+        line.geometry.attributes.position.needsUpdate = true;
+
+        // Pulse effect on connections
+        line.material.opacity = 0.2 + Math.sin(time * 2 + connection.pulsePhase) * 0.1;
+      });
+
+      // Mouse interaction - subtle camera movement
+      camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.05;
+      camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Handle resize
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      if (mountRef.current && renderer.domElement) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
+    };
+  }, []);
+
+  return (
+    <div 
+      ref={mountRef} 
+      className="absolute inset-0 z-0"
+      style={{ 
+        pointerEvents: 'none',
+        opacity: 0.6
+      }} 
+    />
+  );
 };
 
 const Header = () => {
@@ -119,6 +522,12 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      {/* 3D Tech Landscape Background */}
+      <TechLandscape />
+      
+      {/* 3D Network Visualization */}
+      <NetworkVisualization />
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
@@ -126,6 +535,7 @@ const Hero = () => {
         <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-150"></div>
       </div>
 
+      {/* Content overlay */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-8">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm text-gray-700">
