@@ -532,19 +532,64 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      
-      // Calculate if we're in the footer area (last 20% of the page)
-      const footerThreshold = documentHeight - windowHeight * 1.35;
-      
-      setIsOverDarkSection(scrollY > footerThreshold);
+    // Create an intersection observer to watch the footer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // If footer is intersecting with the top part of viewport (where header is)
+          if (entry.isIntersecting) {
+            // Check if the footer has reached the header area (top 80px of viewport)
+            const footerRect = entry.boundingClientRect;
+            const headerHeight = 80; // Approximate header height
+            
+            // If footer's top is within the header area
+            if (footerRect.top <= headerHeight) {
+              setIsOverDarkSection(true);
+            } else {
+              setIsOverDarkSection(false);
+            }
+          } else {
+            setIsOverDarkSection(false);
+          }
+        });
+      },
+      {
+        // Watch for intersection with the top portion of the viewport where header sits
+        rootMargin: '-60px 0px 0px 0px',
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5]
+      }
+    );
+
+    // Function to find and observe the footer
+    const observeFooter = () => {
+      // Look for footer element by tag name
+      const footer = document.querySelector('footer');
+      if (footer) {
+        observer.observe(footer);
+        return footer;
+      }
+      return null;
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Initial observation
+    let footerElement = observeFooter();
+
+    // If footer not found initially, try again after a short delay (for dynamic content)
+    if (!footerElement) {
+      const timeout = setTimeout(() => {
+        footerElement = observeFooter();
+      }, 100);
+
+      return () => {
+        clearTimeout(timeout);
+        observer.disconnect();
+      };
+    }
+
+    // Cleanup function
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const emailTextClass = isOverDarkSection 
