@@ -42,12 +42,7 @@ const TechLandscape = () => {
   const animationRef = useRef(null);
 
   useEffect(() => {
-      console.log('3D Component mounting landscape...', mountRef.current);
-  
-  if (!mountRef.current) {
-    console.log('No mount ref found');
-    return;
-  }
+    if (!mountRef.current) return;
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -248,12 +243,7 @@ const NetworkVisualization = () => {
   const animationRef = useRef(null);
 
   useEffect(() => {
-      console.log('3D Component mounting 3d network...', mountRef.current);
-  
-  if (!mountRef.current) {
-    console.log('No mount ref found');
-    return;
-  }
+    if (!mountRef.current) return;
 
     // Scene setup
     const scene = new THREE.Scene();
