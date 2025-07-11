@@ -538,7 +538,7 @@ const Header = () => {
       const documentHeight = document.documentElement.scrollHeight;
       
       // Calculate if we're in the footer area (last 20% of the page)
-      const footerThreshold = documentHeight - windowHeight * 1.2;
+      const footerThreshold = documentHeight - windowHeight * 1.35;
       
       setIsOverDarkSection(scrollY > footerThreshold);
     };
