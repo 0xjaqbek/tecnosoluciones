@@ -266,8 +266,10 @@ const NetworkVisualization = () => {
 
     // Create network nodes
     const nodes = [];
-    const connections = [];
+    const dynamicConnections = [];
     const nodeCount = 25;
+    const maxConnections = 4;
+    const connectionDuration = 1000; // 1 second in milliseconds
 
     // Node geometry and materials
     const nodeGeometry = new THREE.SphereGeometry(0.03, 16, 16);
@@ -302,39 +304,87 @@ const NetworkVisualization = () => {
       node.userData = {
         originalPosition: node.position.clone(),
         pulsePhase: Math.random() * Math.PI * 2,
-        isPulse: node.material === pulseNodeMaterial
+        isPulse: node.material === pulseNodeMaterial,
+        index: i
       };
       
       scene.add(node);
       nodes.push(node);
     }
 
-    // Create connections between nearby nodes
-    const lineMaterial = new THREE.LineBasicMaterial({ 
-      color: 0x667eea, 
-      transparent: true, 
-      opacity: 0.3 
-    });
+    // Function to create a new dynamic connection
+    const createConnection = () => {
+      if (dynamicConnections.length >= maxConnections) return;
 
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const distance = nodes[i].position.distanceTo(nodes[j].position);
-        if (distance < 2.5 && Math.random() > 0.7) {
-          const geometry = new THREE.BufferGeometry().setFromPoints([
-            nodes[i].position,
-            nodes[j].position
-          ]);
-          const line = new THREE.Line(geometry, lineMaterial);
-          scene.add(line);
-          connections.push({
-            line,
-            nodeA: nodes[i],
-            nodeB: nodes[j],
-            pulsePhase: Math.random() * Math.PI * 2
-          });
+      // Pick two random nodes
+      const nodeA = nodes[Math.floor(Math.random() * nodes.length)];
+      const nodeB = nodes[Math.floor(Math.random() * nodes.length)];
+      
+      // Don't connect a node to itself
+      if (nodeA === nodeB) return;
+
+      // Check if connection already exists
+      const exists = dynamicConnections.some(conn => 
+        (conn.nodeA === nodeA && conn.nodeB === nodeB) ||
+        (conn.nodeA === nodeB && conn.nodeB === nodeA)
+      );
+      if (exists) return;
+
+      // Create line geometry and material
+      const geometry = new THREE.BufferGeometry().setFromPoints([
+        nodeA.position,
+        nodeB.position
+      ]);
+      
+      const material = new THREE.LineBasicMaterial({ 
+        color: 0x667eea, 
+        transparent: true, 
+        opacity: 0
+      });
+
+      const line = new THREE.Line(geometry, material);
+      scene.add(line);
+
+      // Add to connections array
+      const connection = {
+        line,
+        nodeA,
+        nodeB,
+        createdAt: Date.now(),
+        opacity: 0,
+        maxOpacity: 0.6 + Math.random() * 0.4,
+        pulsePhase: Math.random() * Math.PI * 2,
+        fadeDirection: 1 // 1 for fade in, -1 for fade out
+      };
+
+      dynamicConnections.push(connection);
+    };
+
+    // Function to remove expired connections
+    const removeExpiredConnections = () => {
+      const currentTime = Date.now();
+      
+      for (let i = dynamicConnections.length - 1; i >= 0; i--) {
+        const connection = dynamicConnections[i];
+        const age = currentTime - connection.createdAt;
+        
+        // Start fading out after 800ms, remove after 1000ms
+        if (age > 800) {
+          connection.fadeDirection = -1;
+        }
+        
+        if (age > connectionDuration) {
+          scene.remove(connection.line);
+          connection.line.geometry.dispose();
+          connection.line.material.dispose();
+          dynamicConnections.splice(i, 1);
         }
       }
-    }
+    };
+
+    // Create initial connections
+    let lastConnectionTime = 0;
+    const connectionInterval = 200; // Create new connection every 200ms
 
     // Position camera
     camera.position.z = 8;
@@ -352,6 +402,16 @@ const NetworkVisualization = () => {
     // Animation loop
     const animate = () => {
       const time = Date.now() * 0.001;
+      const currentTime = Date.now();
+
+      // Create new connections periodically
+      if (currentTime - lastConnectionTime > connectionInterval) {
+        createConnection();
+        lastConnectionTime = currentTime;
+      }
+
+      // Remove expired connections
+      removeExpiredConnections();
 
       // Rotate the entire network slowly
       scene.rotation.y = time * 0.1;
@@ -371,9 +431,11 @@ const NetworkVisualization = () => {
         }
       });
 
-      // Update connections
-      connections.forEach(connection => {
-        const { line, nodeA, nodeB } = connection;
+      // Update dynamic connections
+      dynamicConnections.forEach(connection => {
+        const { line, nodeA, nodeB, createdAt, maxOpacity, pulsePhase, fadeDirection } = connection;
+        
+        // Update line positions
         const positions = line.geometry.attributes.position.array;
         positions[0] = nodeA.position.x;
         positions[1] = nodeA.position.y;
@@ -383,8 +445,28 @@ const NetworkVisualization = () => {
         positions[5] = nodeB.position.z;
         line.geometry.attributes.position.needsUpdate = true;
 
-        // Pulse effect on connections
-        line.material.opacity = 0.2 + Math.sin(time * 2 + connection.pulsePhase) * 0.1;
+        // Handle fading animation
+        const age = currentTime - createdAt;
+        let targetOpacity;
+        
+        if (fadeDirection === 1) {
+          // Fade in
+          const fadeInProgress = Math.min(age / 200, 1); // 200ms fade in
+          targetOpacity = fadeInProgress * maxOpacity;
+        } else {
+          // Fade out
+          const fadeOutProgress = Math.max(0, (connectionDuration - age) / 200); // 200ms fade out
+          targetOpacity = fadeOutProgress * maxOpacity;
+        }
+
+        // Add pulse effect
+        const pulseMultiplier = 0.8 + Math.sin(time * 4 + pulsePhase) * 0.2;
+        connection.opacity = targetOpacity * pulseMultiplier;
+        line.material.opacity = connection.opacity;
+
+        // Add subtle color variation
+        const colorShift = Math.sin(time * 2 + pulsePhase) * 0.1;
+        line.material.color.setHSL(0.6 + colorShift, 0.8, 0.6);
       });
 
       // Mouse interaction - subtle camera movement
@@ -417,6 +499,12 @@ const NetworkVisualization = () => {
       if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
       }
+      // Clean up dynamic connections
+      dynamicConnections.forEach(connection => {
+        scene.remove(connection.line);
+        connection.line.geometry.dispose();
+        connection.line.material.dispose();
+      });
       renderer.dispose();
     };
   }, []);
