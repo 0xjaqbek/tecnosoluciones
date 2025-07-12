@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BlurText from './BlurText';
+import ScrollReveal from './ScrollReveal';
+import ScrollFloat from './ScrollFloat';
 
 // Google Analytics setup
 const initGoogleAnalytics = () => {
@@ -866,28 +868,53 @@ const Services = () => {
             <Sparkles className="w-4 h-4" />
             <span>Nuestros Servicios</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Soluciones que{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              transforman
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ofrecemos servicios especializados diseñados para impulsar tu negocio hacia el éxito digital
-          </p>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            baseY={20}
+            duration={0.8}
+            delay={0.2}
+            enableBlur={true}
+            blurStrength={5}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Soluciones que{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
+                transforman
+              </span>
+            </h2>
+          </ScrollReveal>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            baseY={10}
+            duration={0.8}
+            delay={0.4}
+          >
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ofrecemos servicios especializados diseñados para impulsar tu negocio hacia el éxito digital
+            </p>
+          </ScrollReveal>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCard
+            <ScrollReveal
               key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              features={service.features}
-              gradient={service.gradient}
-              delay={index * 100}
-            />
+              baseOpacity={0}
+              baseY={30}
+              duration={0.6}
+              delay={0.1 * index}
+            >
+              <ServiceCard
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                features={service.features}
+                gradient={service.gradient}
+                delay={index * 100}
+              />
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -899,13 +926,45 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
   const IconComponent = icon;
   
   return (
-    <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut"
+      }}
+      className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
+    >
       <div className={`inline-flex items-center justify-center w-14 h-14 ${gradient} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
         <IconComponent className="w-7 h-7 text-white" />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
-    </div>
+      
+      {/* Title with preserved bold styling and animation */}
+      <h3 className="mb-3">
+        <ScrollFloat
+          className="font-bold"  // Added font-bold here
+          textClassName="text-xl text-gray-900"  // Added text styling
+          duration={0.8}
+          stagger={0.02}
+          yOffset={30}
+        >
+          {title}
+        </ScrollFloat>
+      </h3>
+      
+      {/* Description */}
+      <p className="text-gray-600 leading-relaxed">
+        <ScrollFloat
+          duration={0.6}
+          stagger={0.01}
+          yOffset={20}
+          delay={0.2}
+        >
+          {description}
+        </ScrollFloat>
+      </p>
+    </motion.div>
   );
 };
 
