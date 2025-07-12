@@ -713,14 +713,14 @@ const Hero = () => {
               text="Potenciá tu negocio con"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight"
               animateBy="words"
-              delay={25}
+              delay={50}
               direction="top"
               animationFrom={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animationTo={[
                 { opacity: 0.6, y: 5, filter: 'blur(4px)' },
                 { opacity: 1, y: 0, filter: 'blur(0px)' }
               ]}
-              stepDuration={0.25}
+              stepDuration={0.3}
             />
             <BlurText
               text="Marketing Digital"
@@ -733,7 +733,7 @@ const Hero = () => {
                 { opacity: 0.6, y: 5, filter: 'blur(4px)' },
                 { opacity: 1, y: 0, filter: 'blur(0px)' }
               ]}
-              stepDuration={0.3}
+              stepDuration={0.35}
             />
           </div>
 
