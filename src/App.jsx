@@ -21,6 +21,7 @@ import { motion } from 'framer-motion';
 import BlurText from './BlurText';
 import ScrollReveal from './ScrollReveal';
 import ScrollFloat from './ScrollFloat';
+import GradientText from './GradientText';
 
 // Google Analytics setup
 const initGoogleAnalytics = () => {
@@ -29,11 +30,17 @@ const initGoogleAnalytics = () => {
   script1.src = 'https://www.googletagmanager.com/gtag/js?id=AW-1029418216';
   document.head.appendChild(script1);
 
-  // Add Google Font for Contrail One
-  const fontLink = document.createElement('link');
-  fontLink.href = 'https://fonts.googleapis.com/css2?family=Contrail+One&display=swap';
-  fontLink.rel = 'stylesheet';
-  document.head.appendChild(fontLink);
+// Add Google Font for Passion One (used in Footer)
+  const passionOneFontLink = document.createElement('link');
+  passionOneFontLink.href = 'https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap';
+  passionOneFontLink.rel = 'stylesheet';
+  document.head.appendChild(passionOneFontLink);
+
+  // Add Google Font for Contrail One (used in Header)
+  const contrailOneFontLink = document.createElement('link');
+  contrailOneFontLink.href = 'https://fonts.googleapis.com/css2?family=Contrail+One&display=swap';
+  contrailOneFontLink.rel = 'stylesheet';
+  document.head.appendChild(contrailOneFontLink);
 
   window.dataLayer = window.dataLayer || [];
   function gtag() {
@@ -610,15 +617,16 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span 
-                className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              <GradientText
+                className="text-2xl font-black from-blue-600 to-purple-600 bg-clip-text text-transparent p-1 m-2"
                 style={{ fontFamily: 'Contrail One, cursive' }}
+                colors={['#2563EB', '#7C3AED', '#2563EB', '#7C3AED']}
               >
                 TecnoSoluciones
-              </span>
+              </GradientText>
             </div>
           </div>
 
@@ -1065,8 +1073,8 @@ const Footer = () => {
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span 
-                className="text-xl font-bold"
-                style={{ fontFamily: 'Contrail One, cursive' }}
+                className="text-3xl font-bold"
+                style={{ fontFamily: 'Passion One, cursive' }}
               >
                 TecnoSoluciones
               </span>
