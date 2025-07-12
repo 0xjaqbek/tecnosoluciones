@@ -18,6 +18,8 @@ import {
   Users
 } from 'lucide-react';
 
+import BlurText from './BlurText';
+
 // Google Analytics setup
 const initGoogleAnalytics = () => {
   const script1 = document.createElement('script');
@@ -696,27 +698,69 @@ const Hero = () => {
       {/* Content overlay */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-8">
-          <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm text-gray-700">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm text-gray-700"
+          >
             <Sparkles className="w-4 h-4 text-purple-600" />
             <span>+20 años de experiencia comprobada</span>
+          </motion.div>
+
+          <div className="space-y-2">
+            <BlurText
+              text="Potenciá tu negocio con"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight"
+              animateBy="words"
+              delay={25}
+              direction="top"
+              animationFrom={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animationTo={[
+                { opacity: 0.6, y: 5, filter: 'blur(4px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)' }
+              ]}
+              stepDuration={0.25}
+            />
+            <BlurText
+              text="Marketing Digital"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent  pb-3 mb-2"
+              animateBy="words"
+              delay={100}
+              direction="top"
+              animationFrom={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animationTo={[
+                { opacity: 0.6, y: 5, filter: 'blur(4px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)' }
+              ]}
+              stepDuration={0.3}
+            />
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-            Potenciá tu negocio con{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Marketing Digital
-            </span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          >
             Soluciones tecnológicas integrales que transforman empresas y maximizan resultados.
-          </p>
+          </motion.p>
 
-          <div className="text-lg text-gray-500 max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="text-lg text-gray-500 max-w-2xl mx-auto"
+          >
             Especialistas en publicidad digital, con más de 20 años de experiencia comprobada.
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
             <button
               onClick={handleCTAClick}
               className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
@@ -734,7 +778,7 @@ const Hero = () => {
               <MessageCircle className="w-5 h-5" />
               <span className="font-semibold">Consulta gratuita</span>
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
