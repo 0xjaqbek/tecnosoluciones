@@ -17,7 +17,7 @@ import {
   Clock,
   Users
 } from 'lucide-react';
-
+import { motion } from 'framer-motion';
 import BlurText from './BlurText';
 
 // Google Analytics setup
