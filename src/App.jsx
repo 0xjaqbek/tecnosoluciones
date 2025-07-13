@@ -718,10 +718,10 @@ const Hero = () => {
             <span>+20 años de experiencia comprobada</span>
           </motion.div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col items-center space-y-2">
             <BlurText
               text="Potenciá tu negocio con"
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
               direction="top"
@@ -734,7 +734,7 @@ const Hero = () => {
             />
             <BlurText
               text="Marketing Digital"
-              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent  pb-3 mb-2"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent  pb-3 mb-2"
               animateBy="words"
               delay={100}
               direction="top"
