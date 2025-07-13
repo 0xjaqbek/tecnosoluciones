@@ -721,7 +721,7 @@ const Hero = () => {
           <div className="flex flex-col items-center space-y-2">
             <BlurText
               text="Potenciá tu negocio con"
-              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
+              className="text-2xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
               direction="top"
