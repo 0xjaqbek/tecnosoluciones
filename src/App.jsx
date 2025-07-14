@@ -924,8 +924,7 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
       {/* Title with preserved bold styling and animation */}
       <h3 className="mb-3">
         <ScrollFloat
-          className="font-bold"  // Added font-bold here
-          textClassName="text-xl text-gray-900"  // Added text styling
+          className="font-bold text-xl text-gray-900"
           duration={0.8}
           stagger={0.02}
           yOffset={30}
@@ -934,8 +933,8 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
         </ScrollFloat>
       </h3>
       
-      {/* Description */}
-      <p className="text-gray-600 leading-relaxed">
+      {/* Description - FIXED: Changed from <p> to <div> */}
+      <div className="text-gray-600 leading-relaxed">
         <ScrollFloat
           duration={0.6}
           stagger={0.01}
@@ -944,7 +943,7 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
         >
           {description}
         </ScrollFloat>
-      </p>
+      </div>
     </motion.div>
   );
 };
