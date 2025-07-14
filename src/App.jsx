@@ -23,33 +23,6 @@ import ScrollReveal from './ScrollReveal';
 import ScrollFloat from './ScrollFloat';
 import GradientText from './GradientText';
 
-// Google Analytics setup
-const initGoogleAnalytics = () => {
-  const script1 = document.createElement('script');
-  script1.async = true;
-  script1.src = 'https://www.googletagmanager.com/gtag/js?id=AW-1029418216';
-  document.head.appendChild(script1);
-
-// Add Google Font for Passion One (used in Footer)
-  const passionOneFontLink = document.createElement('link');
-  passionOneFontLink.href = 'https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap';
-  passionOneFontLink.rel = 'stylesheet';
-  document.head.appendChild(passionOneFontLink);
-
-  // Add Google Font for Contrail One (used in Header)
-  const contrailOneFontLink = document.createElement('link');
-  contrailOneFontLink.href = 'https://fonts.googleapis.com/css2?family=Contrail+One&display=swap';
-  contrailOneFontLink.rel = 'stylesheet';
-  document.head.appendChild(contrailOneFontLink);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', 'AW-1029418216');
-  window.gtag = gtag;
-};
 
 // 3D Tech Landscape Component
 const TechLandscape = () => {
@@ -1143,8 +1116,6 @@ const Footer = () => {
 
 const App = () => {
   useEffect(() => {
-    initGoogleAnalytics();
-    
     if (window.gtag) {
       window.gtag('event', 'conversion', {'send_to': 'AW-1029418216/1AT6CPOQ2O0aEOjZ7uoD'});
     }
