@@ -11,7 +11,7 @@ const ChatWidget = () => {
 
   // Your local server URL - update this to match your setup
   const SERVER_URL = import.meta.env.MODE === 'localhost' 
-  ? 'https://d72f31ebc3c2.ngrok-free.app '  // or your deployed server URL
+  ? 'https://7b868258933b.ngrok-free.app'  // or your deployed server URL
   : 'http://localhost:3001';
 
   const scrollToBottom = () => {
