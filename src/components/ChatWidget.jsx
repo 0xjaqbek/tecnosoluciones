@@ -10,9 +10,9 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   // Your local server URL - update this to match your setup
-const SERVER_URL = window.location.protocol === 'https:' 
-  ? 'https://d72f31ebc3c2.ngrok-free.app'     // HTTPS (deployed)
-  : 'http://localhost:3001';                   // HTTP (local)
+  const SERVER_URL = import.meta.env.MODE === 'localhost' 
+  ? 'https://d72f31ebc3c2.ngrok-free.app '  // or your deployed server URL
+  : 'http://localhost:3001';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
