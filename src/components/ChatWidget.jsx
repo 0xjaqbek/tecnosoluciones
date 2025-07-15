@@ -24,17 +24,21 @@ const ChatWidget = () => {
 
   useEffect(() => {
     // Test connection to local server
-    const testConnection = async () => {
-      try {
-        const response = await fetch(`${SERVER_URL}/api/simple-test`);
-        if (response.ok) {
-          setIsConnected(true);
-        }
-      } catch {
-        console.log('Assistant server not available');
-        setIsConnected(false);
+const testConnection = async () => {
+  try {
+    const response = await fetch(`${SERVER_URL}/api/simple-test`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true'
       }
-    };
+    });
+    if (response.ok) {
+      setIsConnected(true);
+    }
+  } catch {
+    console.log('Assistant server not available');
+    setIsConnected(false);
+  }
+};
 
     testConnection();
   }, []);
