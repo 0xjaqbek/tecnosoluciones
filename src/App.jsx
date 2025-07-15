@@ -22,6 +22,7 @@ import BlurText from './BlurText';
 import ScrollReveal from './ScrollReveal';
 import ScrollFloat from './ScrollFloat';
 import GradientText from './GradientText';
+import ChatWidget from './components/ChatWidget';
 
 
 // 3D Tech Landscape Component
@@ -1127,6 +1128,7 @@ const App = () => {
       <Services />
       <About />
       <Footer />
+      <ChatWidget />
     </div>
   );
 };
