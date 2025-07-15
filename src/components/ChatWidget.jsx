@@ -10,9 +10,9 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   // Your local server URL - update this to match your setup
-  const SERVER_URL = import.meta.env.MODE === 'localhost' 
-  ? 'https://7b868258933b.ngrok-free.app'  // or your deployed server URL
-  : 'http://localhost:3001';
+    const SERVER_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3001'                    // Local development
+  : 'https://7b868258933b.ngrok-free.app';    // Deployed (production)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -22,26 +22,26 @@ const ChatWidget = () => {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    // Test connection to local server
-const testConnection = async () => {
-  try {
-    const response = await fetch(`${SERVER_URL}/api/simple-test`, {
-      headers: {
-        'ngrok-skip-browser-warning': 'true'
+useEffect(() => {
+  // Test connection to local server
+  const testConnection = async () => {
+    try {
+      const response = await fetch(`${SERVER_URL}/api/simple-test`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      });
+      if (response.ok) {
+        setIsConnected(true);
       }
-    });
-    if (response.ok) {
-      setIsConnected(true);
+    } catch {
+      console.log('Assistant server not available');
+      setIsConnected(false);
     }
-  } catch {
-    console.log('Assistant server not available');
-    setIsConnected(false);
-  }
-};
+  };
 
-    testConnection();
-  }, []);
+  testConnection();
+}, [SERVER_URL]);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
