@@ -10,7 +10,7 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   // Your local server URL - update this to match your setup
-  const SERVER_URL = import.meta.env.MODE === 'localhost' 
+  const SERVER_URL = import.meta.env.MODE === 'development' 
   ? 'https://d72f31ebc3c2.ngrok-free.app '  // or your deployed server URL
   : 'http://localhost:3001';
 
