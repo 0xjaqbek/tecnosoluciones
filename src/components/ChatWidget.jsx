@@ -75,7 +75,8 @@ const ChatWidget = () => {
       const response = await fetch(`${SERVER_URL}/api/tecnosoluciones-chat`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true',
         },
         body: JSON.stringify({
           message: inputValue,
