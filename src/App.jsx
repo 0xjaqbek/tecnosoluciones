@@ -15,7 +15,9 @@ import {
   ArrowRight,
   Sparkles,
   Clock,
-  Users
+  Users,
+  Bot,
+  Gift
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BlurText from './BlurText';
@@ -33,7 +35,7 @@ const TechLandscape = () => {
   const animationRef = useRef(null);
 
   useEffect(() => {
-    console.log('TechLandscape mounting...', mountRef.current); // DEBUG LOG
+    console.log('TechLandscape mounting...', mountRef.current);
     if (!mountRef.current) return;
 
     // Scene setup
@@ -536,7 +538,7 @@ const Header = () => {
       const footer = document.querySelector('footer');
       if (footer) {
         observer.observe(footer);
-        console.log('Footer found and observed'); // Debug log
+        console.log('Footer found and observed');
         return true;
       }
       return false;
@@ -547,7 +549,7 @@ const Header = () => {
       // If not found, try after DOM is ready
       const timeout = setTimeout(() => {
         if (!findAndObserveFooter()) {
-          console.log('Footer not found, falling back to scroll detection'); // Debug log
+          console.log('Footer not found, falling back to scroll detection');
           
           // Fallback to scroll-based detection
           const handleScroll = () => {
@@ -708,7 +710,7 @@ const Hero = () => {
             />
             <BlurText
               text="que Aumenta tus Ventas Online"
-              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent  pb-3 mb-2"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
               animateBy="words"
               delay={100}
               direction="top"
@@ -848,7 +850,7 @@ const Services = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Sparkles className="w-4 h-4" />
-            <span>Nuestros Servicios</span>
+            <span>Servicios de Desarrollo Web que Generan Resultados</span>
           </div>
           
           <ScrollReveal
@@ -860,9 +862,9 @@ const Services = () => {
             blurStrength={5}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Sitios web que{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-                realmente venden
+              Transformá tu negocio con{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                sitios web profesionales
               </span>
             </h2>
           </ScrollReveal>
@@ -873,8 +875,8 @@ const Services = () => {
             duration={0.8}
             delay={0.4}
           >
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Servicios especializados diseñados para convertir visitantes en clientes y hacer crecer tu negocio online
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              que realmente venden
             </p>
           </ScrollReveal>
         </div>
@@ -922,7 +924,6 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
         <IconComponent className="w-7 h-7 text-white" />
       </div>
       
-      {/* Title with preserved bold styling and animation */}
       <h3 className="mb-3">
         <ScrollFloat
           className="font-bold text-xl text-gray-900"
@@ -934,7 +935,6 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
         </ScrollFloat>
       </h3>
       
-      {/* Description - FIXED: Changed from <p> to <div> */}
       <div className="text-gray-600 leading-relaxed">
         <ScrollFloat
           duration={0.6}
@@ -953,7 +953,7 @@ const About = () => {
   const features = [
     {
       icon: Star,
-      title: "+8 años de experiencia",
+      title: "8+ años de experiencia",
       description: "Más de 8 años creando sitios web exitosos que generan resultados reales para empresas argentinas.",
       gradient: "bg-gradient-to-br from-yellow-500 to-orange-600"
     },
@@ -1000,7 +1000,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="mt-8 flex items-center space-x-4">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <div className="flex items-center space-x-2">
                 <Clock className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700 font-medium">Respuesta en 1 hora</span>
@@ -1023,6 +1023,167 @@ const About = () => {
               />
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ChatbotDemo = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleChatbotClick = () => {
+    setIsVisible(!isVisible);
+    // Track chatbot demo interaction
+    if (window.gtag) {
+      window.gtag('event', 'chatbot_demo_click', {
+        event_category: 'engagement',
+        event_label: 'chatbot_demo'
+      });
+    }
+  };
+
+  return (
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-blue-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <Bot className="w-4 h-4" />
+            <span>Chatbot Profesional</span>
+          </div>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            baseY={20}
+            duration={0.8}
+            delay={0.2}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              ¿Querés ver cómo funciona un{' '}
+              <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                chatbot profesional?
+              </span>
+            </h2>
+          </ScrollReveal>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            baseY={10}
+            duration={0.8}
+            delay={0.4}
+          >
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Experimentá en tiempo real cómo nuestros chatbots pueden ayudar a tu negocio a capturar leads y atender clientes 24/7
+            </p>
+          </ScrollReveal>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="space-y-6"
+          >
+            <button
+              onClick={handleChatbotClick}
+              className="group inline-flex items-center space-x-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl text-lg font-semibold"
+            >
+              <Bot className="w-6 h-6" />
+              <span>PROBAR NUESTRO CHATBOT</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <div className="bg-white/60 backdrop-blur-sm border border-white/30 rounded-2xl p-6 max-w-2xl mx-auto">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center">
+                  <Bot className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Chatbot TecnoSoluciones</h3>
+                  <p className="text-sm text-gray-600">Especializado en desarrollo web profesional</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 text-left">
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <p className="text-sm text-gray-800">
+                    <strong>✅ Atiende consultas 24/7</strong> - Nunca pierdas un cliente potencial
+                  </p>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <p className="text-sm text-gray-800">
+                    <strong>📈 Captura leads automáticamente</strong> - Califica clientes mientras dormís
+                  </p>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <p className="text-sm text-gray-800">
+                    <strong>🚀 Respuestas instantáneas</strong> - Información precisa sobre tus servicios
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SpecialOffer = () => {
+  return (
+    <section className="py-24 bg-gradient-to-r from-purple-600 to-pink-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm font-medium text-white">
+              <Gift className="w-4 h-4" />
+              <span>OFERTA ESPECIAL</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              ¡No pierdas más clientes!
+            </h2>
+            
+            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+              Cada día que pasás sin un sitio web optimizado, tu competencia te está ganando clientes
+            </p>
+
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 max-w-2xl mx-auto">
+              <div className="text-center space-y-4">
+                <div className="text-6xl font-bold text-white">15%</div>
+                <div className="text-2xl font-semibold text-white">DE DESCUENTO</div>
+                <div className="text-lg text-white/90">
+                  Mencioná que viste esta información y recibí un 15% de descuento en tu primer proyecto
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <a
+                href="https://wa.me/5491136227641?text=Hola! Vi la oferta especial del 15% de descuento y me interesa crear un sitio web profesional para mi negocio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center space-x-3 bg-white text-purple-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span>RECLAMAR DESCUENTO</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+
+              <div className="text-white/90 text-sm">
+                <div className="flex items-center space-x-2">
+                  <Clock className="w-4 h-4" />
+                  <span>Respuesta en menos de 1 hora</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -1127,6 +1288,8 @@ const App = () => {
       <Hero />
       <Services />
       <About />
+      <ChatbotDemo />
+      <SpecialOffer />
       <Footer />
       <ChatWidget />
     </div>
