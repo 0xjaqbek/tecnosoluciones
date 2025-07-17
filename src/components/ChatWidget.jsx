@@ -48,7 +48,7 @@ useEffect(() => {
       // Add welcome message
       setMessages([{
         id: 1,
-        text: "¡Hola! Soy el asistente virtual de TecnoSoluciones. 👋\n\nTengo más de 20 años de experiencia ayudando a empresas a crecer con marketing digital, soporte técnico e inteligencia artificial.\n\n¿En qué puedo ayudarte hoy?",
+        text: "¡Hola! Soy el asistente virtual de TecnoSoluciones. 👋\n\nTengo más de 8 años de experiencia ayudando a empresas argentinas a crear sitios web que realmente venden, implementar chatbots inteligentes y potenciar su marketing digital.\n\n¿En qué puedo ayudarte hoy?",
         sender: 'bot',
         timestamp: new Date()
       }]);
