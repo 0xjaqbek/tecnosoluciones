@@ -636,10 +636,10 @@ const Header = () => {
             <div className="flex flex-col space-y-4">
               <div className={`flex items-center space-x-2 ${emailTextClass}`}>
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">tecnosolucionesuno@gmail.com</span>
+                <span className="text-sm">technosoluciones@gmail.uno</span>
               </div>
               <a
-                href="https://wa.me/5491134227461"
+                href="https://wa.me/5491136227641"
                 onClick={handleWhatsAppClick}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -689,12 +689,12 @@ const Hero = () => {
             className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm text-gray-700 mt-20 sm:mt-0"
           >
             <Sparkles className="w-4 h-4 text-purple-600 " />
-            <span>+20 años de experiencia comprobada</span>
+            <span>+8 años de experiencia comprobada</span>
           </motion.div>
 
           <div className="flex flex-col items-center space-y-2">
             <BlurText
-              text="Potenciá tu negocio con"
+              text="Desarrollo Web Profesional"
               className="text-2xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
@@ -707,7 +707,7 @@ const Hero = () => {
               stepDuration={0.3}
             />
             <BlurText
-              text="Marketing Digital"
+              text="que Aumenta tus Ventas Online"
               className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent  pb-3 mb-2"
               animateBy="words"
               delay={100}
@@ -727,7 +727,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
           >
-            Soluciones tecnológicas integrales que transforman empresas y maximizan resultados.
+            ¿Necesitás un sitio web que realmente convierta visitantes en clientes? Somos especialistas en desarrollo web profesional y marketing digital.
           </motion.p>
 
           <motion.div
@@ -736,7 +736,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 1 }}
             className="text-lg text-gray-500 max-w-2xl mx-auto"
           >
-            Especialistas en publicidad digital, con más de 20 años de experiencia comprobada.
+            Más de 8 años transformando negocios argentinos con sitios web que venden las 24 horas.
           </motion.div>
 
           <motion.div
@@ -754,13 +754,13 @@ const Hero = () => {
             </button>
             
             <a
-              href="https://wa.me/5491134227461"
+              href="https://wa.me/5491136227641"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-gray-700 px-8 py-4 rounded-full transition-all duration-300"
             >
               <MessageCircle className="w-5 h-5" />
-              <span className="font-semibold">Consulta gratuita</span>
+              <span className="font-semibold">Consulta GRATIS</span>
             </a>
           </motion.div>
         </div>
@@ -800,44 +800,44 @@ const Services = () => {
   const services = [
     {
       icon: TrendingUp,
-      title: "Marketing Digital",
-      description: "Hacé crecer tu negocio con campañas publicitarias que realmente funcionan y generan resultados medibles.",
+      title: "Desarrollo Web Profesional",
+      description: "Sitios web personalizados que convierten visitantes en clientes y aumentan tus ventas 24/7.",
       gradient: "bg-gradient-to-br from-blue-500 to-purple-600",
       features: [
-        "Estrategias personalizadas para tu sector",
-        "Gestión completa de redes sociales",
-        "Publicidad en Google y Facebook Ads",
-        "Análisis de resultados y optimización continua",
+        "Diseños únicos que reflejan tu marca",
+        "Optimizados para conversión y ventas",
+        "Responsive (se adapta a móviles)",
+        "Carga rápida y SEO optimizado",
         "Aumento comprobado en ventas",
-        "ROI garantizado"
-      ]
-    },
-    {
-      icon: Wrench,
-      title: "Soporte Técnico",
-      description: "Reparación, actualización e instalación profesional para tu PC o Notebook con garantía total.",
-      gradient: "bg-gradient-to-br from-green-500 to-teal-600",
-      features: [
-        "Diagnóstico gratuito y detallado",
-        "Soluciones rápidas y efectivas",
-        "Reparación de hardware y software",
-        "Actualizaciones de sistemas",
-        "Instalación de programas especializados",
-        "Soporte remoto 24/7"
+        "Soporte técnico continuo"
       ]
     },
     {
       icon: Brain,
-      title: "Inteligencia Artificial",
-      description: "Tutorías personalizadas para implementar IA en tu negocio y automatizar procesos clave.",
+      title: "Chatbots Inteligentes",
+      description: "Automatizá la atención al cliente y capturá leads las 24 horas con chatbots personalizados.",
+      gradient: "bg-gradient-to-br from-green-500 to-teal-600",
+      features: [
+        "Atención automatizada 24/7",
+        "Captura de leads cualificados",
+        "Integración con WhatsApp",
+        "Respuestas personalizadas",
+        "Analytics y reportes",
+        "Configuración sin código"
+      ]
+    },
+    {
+      icon: Wrench,
+      title: "Marketing Digital Integral",
+      description: "Gestión completa de redes sociales y publicidad online que genera resultados medibles.",
       gradient: "bg-gradient-to-br from-purple-500 to-pink-600",
       features: [
-        "Automatización de procesos empresariales",
-        "Implementación de chatbots inteligentes",
-        "Análisis predictivo con IA",
-        "Capacitación personalizada",
-        "Consultoría especializada",
-        "Integración con sistemas existentes"
+        "Gestión de redes sociales",
+        "Google y Facebook Ads",
+        "SEO y posicionamiento web",
+        "Contenido estratégico",
+        "Análisis de resultados",
+        "ROI garantizado"
       ]
     }
   ];
@@ -860,9 +860,9 @@ const Services = () => {
             blurStrength={5}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Soluciones que{' '}
+              Sitios web que{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-                transforman
+                realmente venden
               </span>
             </h2>
           </ScrollReveal>
@@ -874,7 +874,7 @@ const Services = () => {
             delay={0.4}
           >
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ofrecemos servicios especializados diseñados para impulsar tu negocio hacia el éxito digital
+              Servicios especializados diseñados para convertir visitantes en clientes y hacer crecer tu negocio online
             </p>
           </ScrollReveal>
         </div>
@@ -953,19 +953,19 @@ const About = () => {
   const features = [
     {
       icon: Star,
-      title: "+20 años de experiencia",
-      description: "Más de dos décadas brindando soluciones tecnológicas exitosas y transformando negocios.",
+      title: "+8 años de experiencia",
+      description: "Más de 8 años creando sitios web exitosos que generan resultados reales para empresas argentinas.",
       gradient: "bg-gradient-to-br from-yellow-500 to-orange-600"
     },
     {
       icon: Target,
-      title: "Soluciones personalizadas",
-      description: "Cada cliente es único. Desarrollamos estrategias específicas adaptadas a tu industria y objetivos.",
+      title: "Sitios web que venden",
+      description: "No solo diseñamos páginas bonitas: desarrollamos herramientas digitales que aumentan tus ventas 24/7.",
       gradient: "bg-gradient-to-br from-blue-500 to-purple-600"
     },
     {
       icon: DollarSign,
-      title: "Consulta gratuita",
+      title: "Consulta inicial GRATIS",
       description: "Presupuestos sin costo y asesoramiento inicial completamente gratuito para evaluar tu proyecto.",
       gradient: "bg-gradient-to-br from-green-500 to-teal-600"
     }
@@ -976,7 +976,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Users className="w-4 h-4" />
               <span>¿Por qué elegirnos?</span>
             </div>
@@ -984,30 +984,30 @@ const About = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Experiencia que{' '}
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                transforma
+                genera resultados
               </span>
             </h2>
             
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
-                Somos una empresa familiar con más de 20 años de trayectoria exitosa, especializada en soluciones tecnológicas innovadoras para particulares, profesionales y pequeñas empresas.
+                Somos una empresa de emprendedores en constante crecimiento y aprendizaje con más de 8 años de trayectoria, especializada en crear sitios web que venden para particulares, profesionales y pequeñas empresas.
               </p>
               <p>
-                Nuestro enfoque principal es el marketing digital, ayudando a cientos de negocios a crecer exponencialmente y aumentar sus ventas a través de campañas publicitarias altamente efectivas y estrategias personalizadas.
+                No solo diseñamos páginas web bonitas: desarrollamos herramientas digitales estratégicas que aumentan tus ventas, mejoran tu presencia online y hacen crecer tu negocio 24/7.
               </p>
               <p>
-                Combinamos experiencia, innovación y resultados garantizados para transformar tu presencia digital.
+                Cada sitio web está optimizado para convertir visitantes en clientes, con diseño responsive, carga rápida y SEO integrado.
               </p>
             </div>
 
             <div className="mt-8 flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Clock className="w-5 h-5 text-blue-600" />
-                <span className="text-gray-700 font-medium">Respuesta en 24hs</span>
+                <span className="text-gray-700 font-medium">Respuesta en 1 hora</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700 font-medium">Garantía total</span>
+                <span className="text-gray-700 font-medium">Más ventas garantizadas</span>
               </div>
             </div>
           </div>
@@ -1053,7 +1053,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              Transformando negocios desde 2004 con soluciones tecnológicas innovadoras y marketing digital efectivo.
+              Transformando negocios argentinos desde 2016 con sitios web profesionales que realmente venden y generan resultados.
             </p>
             <div className="flex space-x-4">
               <a
@@ -1081,7 +1081,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-green-400 transition-colors"
                 >
-                  +54 11 3422 7461
+                  +54 11 3622 7641
                 </a>
               </div>
               <div className="flex items-center space-x-2">
@@ -1098,16 +1098,16 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Servicios</h3>
             <div className="space-y-2 text-gray-300">
-              <p>Marketing Digital Avanzado</p>
-              <p>Soporte Técnico Especializado</p>
-              <p>Inteligencia Artificial</p>
-              <p>Consultoría Tecnológica</p>
+              <p>Desarrollo Web Profesional</p>
+              <p>Chatbots Inteligentes</p>
+              <p>Marketing Digital Integral</p>
+              <p>SEO y Posicionamiento Web</p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 TecnoSoluciones. Todos los derechos reservados. | Transformando negocios desde 2004</p>
+          <p>&copy; 2024 TecnoSoluciones. Todos los derechos reservados. | Desarrollo web profesional desde 2016</p>
         </div>
       </div>
     </footer>
