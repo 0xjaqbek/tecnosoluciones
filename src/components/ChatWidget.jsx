@@ -10,7 +10,7 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   // Your local server URL - update this to match your setup
-    const SERVER_URL = window.location.hostname === 'localhost' 
+  const SERVER_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3001'                    // Local development
   : 'https://7b868258933b.ngrok-free.app';    // Deployed (production)
 
@@ -22,26 +22,37 @@ const ChatWidget = () => {
     scrollToBottom();
   }, [messages]);
 
-useEffect(() => {
-  // Test connection to local server
-  const testConnection = async () => {
-    try {
-      const response = await fetch(`${SERVER_URL}/api/simple-test`, {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
+  useEffect(() => {
+    // Test connection to local server
+    const testConnection = async () => {
+      try {
+        const response = await fetch(`${SERVER_URL}/api/simple-test`, {
+          headers: {
+            'ngrok-skip-browser-warning': 'true'
+          }
+        });
+        if (response.ok) {
+          setIsConnected(true);
         }
-      });
-      if (response.ok) {
-        setIsConnected(true);
+      } catch {
+        console.log('Assistant server not available');
+        setIsConnected(false);
       }
-    } catch {
-      console.log('Assistant server not available');
-      setIsConnected(false);
-    }
-  };
+    };
 
-  testConnection();
-}, [SERVER_URL]);
+    testConnection();
+
+    // Listen for custom event to open chat widget
+    const handleOpenChatWidget = () => {
+      setIsOpen(true);
+    };
+
+    window.addEventListener('openChatWidget', handleOpenChatWidget);
+
+    return () => {
+      window.removeEventListener('openChatWidget', handleOpenChatWidget);
+    };
+  }, [SERVER_URL]);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -131,6 +142,7 @@ useEffect(() => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(true)}
+          data-chat-widget
           className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
         >
           <MessageCircle size={24} />
