@@ -12,7 +12,7 @@ const ChatWidget = () => {
   // Your local server URL - update this to match your setup
   const SERVER_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3001'                    // Local development
-  : 'https://7b868258933b.ngrok-free.app';    // Deployed (production)
+  : 'https://b3c4cb907937.ngrok-free.app';    // Deployed (production)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
