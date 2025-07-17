@@ -1032,10 +1032,16 @@ const About = () => {
 };
 
 const ChatbotDemo = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
   const handleChatbotClick = () => {
-    setIsVisible(!isVisible);
+    // Find and trigger the chat widget
+    const chatWidget = document.querySelector('[data-chat-widget]');
+    if (chatWidget) {
+      chatWidget.click();
+    } else {
+      // Fallback: dispatch a custom event that ChatWidget can listen to
+      window.dispatchEvent(new CustomEvent('openChatWidget'));
+    }
+    
     // Track chatbot demo interaction
     if (window.gtag) {
       window.gtag('event', 'chatbot_demo_click', {
