@@ -710,7 +710,7 @@ const Hero = () => {
             />
             <BlurText
               text="que Aumenta tus Ventas Online"
-              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
+              className="text-2xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
               animateBy="words"
               delay={100}
               direction="top"
