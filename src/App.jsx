@@ -694,10 +694,10 @@ const Hero = () => {
             <span>+8 años de experiencia comprobada</span>
           </motion.div>
 
-          <div className="flex flex-col items-center space-y-2">
+          <div className="flex flex-col items-center space-y-4">
             <BlurText
-              text="Desarrollo Web Profesional"
-              className="text-2xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
+              text="Desarrollo Web"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
               direction="top"
@@ -709,8 +709,21 @@ const Hero = () => {
               stepDuration={0.3}
             />
             <BlurText
-              text="que Aumenta tus Ventas Online"
-              className="text-2xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
+              text="Profesional"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
+              animateBy="words"
+              delay={75}
+              direction="top"
+              animationFrom={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animationTo={[
+                { opacity: 0.6, y: 5, filter: 'blur(4px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)' }
+              ]}
+              stepDuration={0.3}
+            />
+            <BlurText
+              text="que Aumenta tus"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent text-center"
               animateBy="words"
               delay={100}
               direction="top"
@@ -721,7 +734,21 @@ const Hero = () => {
               ]}
               stepDuration={0.35}
             />
+            <BlurText
+              text="Ventas Online"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent text-center pb-3"
+              animateBy="words"
+              delay={125}
+              direction="top"
+              animationFrom={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animationTo={[
+                { opacity: 0.6, y: 5, filter: 'blur(4px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)' }
+              ]}
+              stepDuration={0.35}
+            />
           </div>
+
 
           <motion.p
             initial={{ opacity: 0 }}
