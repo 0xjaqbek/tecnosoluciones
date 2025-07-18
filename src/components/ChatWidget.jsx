@@ -12,7 +12,7 @@ const ChatWidget = () => {
   // Your local server URL - update this to match your setup
   const SERVER_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3001'                    // Local development
-  : 'https://gc-indiana-seafood-markers.trycloudflare.com';    // Deployed (production)
+  : 'https://ja-threshold-abstracts-response.trycloudflare.com';    // Deployed (production)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
