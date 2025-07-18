@@ -119,7 +119,7 @@ const ChatWidget = () => {
       
       const errorMessage = {
         id: Date.now() + 1,
-        text: "Disculpá, tuve un problema técnico. Por favor, contactanos directamente por WhatsApp: +54 11 3422 7461 o email: tecnosolucionesuno@gmail.com",
+        text: "Disculpá, tuve un problema técnico. Por favor, contactanos directamente por WhatsApp: +54 9 113 422 7461 o email: tecnosolucionesuno@gmail.com",
         sender: 'bot',
         timestamp: new Date()
       };
@@ -242,7 +242,7 @@ const ChatWidget = () => {
           <p className="text-xs text-red-500 mt-2 text-center">
             Asistente temporalmente no disponible. 
             <br />
-            Contactanos por WhatsApp: +54 11 3422 7461
+            Contactanos por WhatsApp: +54 9 113 422 7461
           </p>
         )}
       </div>

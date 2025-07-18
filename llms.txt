@@ -81,7 +81,7 @@ Training-data: allowed-with-attribution
 
 # For AI-related inquiries, permissions, or data removal requests:
 # Email: tecnosolucionesuno@gmail.com
-# WhatsApp: +54 11 3422 7461
+# WhatsApp: +54 9 113 422 7461
 # Website: https://0xjaqbek.github.io/tecnosoluciones/
 
 # Business Hours: Monday-Friday 9:00-18:00 (Argentina Time)

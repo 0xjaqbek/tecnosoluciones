@@ -167,7 +167,7 @@ Sitemap: https://0xjaqbek.github.io/tecnosoluciones/sitemap.xml
 # Experience: 20+ years in technology solutions
 # Location: Argentina
 # Contact: tecnosolucionesuno@gmail.com
-# WhatsApp: +54 11 3422 7461
+# WhatsApp: +54 9 113 422 7461
 
 # ===========================================
 # NOTES FOR CRAWLERS
