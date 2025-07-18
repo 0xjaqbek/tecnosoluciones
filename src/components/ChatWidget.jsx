@@ -12,7 +12,7 @@ const ChatWidget = () => {
   // Your local server URL - update this to match your setup
   const SERVER_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3001'                    // Local development
-  : 'https://ja-threshold-abstracts-response.trycloudflare.com';    // Deployed (production)
+  : 'https://monroe-study-papua-ipaq.trycloudflare.com';    // Deployed (production)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
