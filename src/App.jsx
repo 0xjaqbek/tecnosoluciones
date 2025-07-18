@@ -688,16 +688,16 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 text-sm text-gray-700 mt-20 sm:mt-0"
+            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 text-base font-medium text-gray-700 mt-20 sm:mt-0"
           >
-            <Sparkles className="w-4 h-4 text-purple-600 " />
-            <span>+8 años de experiencia comprobada</span>
+            <Sparkles className="w-5 h-5 text-purple-600" />
+            <span className="font-semibold text-l md:text-xl lg:text-xl">+8 años de experiencia comprobada</span>
           </motion.div>
 
           <div className="flex flex-col items-center space-y-2">
             <BlurText
               text="Desarrollo Web Profesional"
-              className="text-2xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
               direction="top"
@@ -740,7 +740,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 1 }}
             className="text-lg text-gray-500 max-w-2xl mx-auto"
           >
-            Más de 8 años transformando negocios argentinos con sitios web que venden las 24 horas.
+            Más de 8 años transformando negocios con sitios web que venden las 24 horas.
           </motion.div>
 
           <motion.div
@@ -755,16 +755,27 @@ const Hero = () => {
             >
               <span className="font-semibold">Descubre nuestros servicios</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            
+            </button>          
             <a
               href="https://wa.me/5491136227641"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-gray-700 px-8 py-4 rounded-full transition-all duration-300"
+              className="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-white/30 backdrop-blur-sm"
             >
-              <MessageCircle className="w-5 h-5" />
-              <span className="font-semibold">Consulta GRATIS</span>
+              {/* Animated shine effect */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 ease-out"></div>
+              
+              {/* Pulsing dot for attention */}
+              <div className="relative">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                <div className="absolute inset-0 w-2 h-2 bg-white rounded-full animate-ping"></div>
+              </div>
+              
+              <MessageCircle className="w-5 h-5 relative z-10" />
+              <span className="font-bold text-lg relative z-10">Consulta GRATIS</span>
+              
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-300"></div>
             </a>
           </motion.div>
         </div>
@@ -922,21 +933,24 @@ const FeatureCard = ({ icon, title, description, gradient }) => {
       }}
       className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
     >
-      <div className={`inline-flex items-center justify-center w-14 h-14 ${gradient} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-        <IconComponent className="w-7 h-7 text-white" />
+      {/* Icon and Title in the same row */}
+      <div className="flex items-center space-x-4 mb-6">
+        <div className={`inline-flex items-center justify-center w-14 h-14 ${gradient} rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+          <IconComponent className="w-7 h-7 text-white" />
+        </div>
+        
+        <h3 className="font-bold text-xl text-gray-900 flex-1">
+          <ScrollFloat
+            duration={0.8}
+            stagger={0.02}
+            yOffset={30}
+          >
+            {title}
+          </ScrollFloat>
+        </h3>
       </div>
       
-      <h3 className="mb-3">
-        <ScrollFloat
-          className="font-bold text-xl text-gray-900"
-          duration={0.8}
-          stagger={0.02}
-          yOffset={30}
-        >
-          {title}
-        </ScrollFloat>
-      </h3>
-      
+      {/* Description below */}
       <div className="text-gray-600 leading-relaxed">
         <ScrollFloat
           duration={0.6}
@@ -978,8 +992,8 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Users className="w-4 h-4" />
+            <div className="flex items-center space-x-2 bg-purple-100 text-purple-800 px-5 py-3 rounded-full text-base font-semibold mb-6">
+              <Users className="w-5 h-5" />
               <span>¿Por qué elegirnos?</span>
             </div>
             
