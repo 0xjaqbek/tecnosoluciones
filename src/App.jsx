@@ -1264,7 +1264,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-green-400 transition-colors"
                 >
-                  +54 11 3622 7641
+                  +54 9 11 3422 7461
                 </a>
               </div>
               <div className="flex items-center space-x-2">
