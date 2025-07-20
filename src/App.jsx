@@ -697,7 +697,7 @@ const Hero = () => {
           <div className="flex flex-col items-center space-y-2">
             <BlurText
               text="Desarrollo Web Profesional"
-              className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight text-center"
+              className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight text-center"
               animateBy="words"
               delay={50}
               direction="top"
@@ -711,7 +711,7 @@ const Hero = () => {
             <div className="text-center">
               <BlurText
                 text="que Aumenta tus Ventas Online"
-                className="text-xl sm:text-2xl md:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
+                className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
                 animateBy="words"
                 delay={100}
                 direction="top"
@@ -729,7 +729,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg  sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
           >
             ¿Necesitás un sitio web que realmente convierta visitantes en clientes? Somos especialistas en desarrollo web profesional y marketing digital.
           </motion.p>
