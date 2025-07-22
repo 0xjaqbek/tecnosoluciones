@@ -24,15 +24,15 @@ const ChatWidget = () => {
 
   // EmailJS Configuration - Replace with your credentials
   const EMAILJS_CONFIG = {
-    serviceId: 'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-    templateId: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-    publicKey: 'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+    serviceId: 'service_odffarj', // Replace with your EmailJS service ID
+    templateId: 'template_u44vofk', // Replace with your EmailJS template ID
+    publicKey: 'O7U25yXlgMEevFg3D' // Replace with your EmailJS public key
   };
 
   // Your local server URL - update this to match your setup
   const SERVER_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3001'                    // Local development
-    : 'https://monroe-study-papua-ipaq.trycloudflare.com';    // Deployed (production)
+    : 'https://bolivia-ace-waterproof-sought.trycloudflare.com';    // Deployed (production)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
