@@ -691,13 +691,14 @@ const Hero = () => {
             className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 text-base font-medium text-gray-700 mt-20 sm:mt-0"
           >
             <Sparkles className="w-5 h-5 text-purple-600" />
-            <span className="font-semibold text-l md:text-xl lg:text-xl">+8 años de experiencia comprobada</span>
+            <span className="font-semibold text-base xs:text-l md:text-xl lg:text-xl">+8 años de experiencia comprobada</span>
           </motion.div>
 
           <div className="flex flex-col items-center space-y-2">
+            {/* Updated responsive text optimized for smallest screens */}
             <BlurText
               text="Desarrollo Web Profesional"
-              className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight text-center"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight text-center px-2"
               animateBy="words"
               delay={50}
               direction="top"
@@ -708,10 +709,10 @@ const Hero = () => {
               ]}
               stepDuration={0.3}
             />
-            <div className="text-center">
+            <div className="text-center px-2">
               <BlurText
                 text="que Aumenta tus Ventas Online"
-                className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
+                className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-3 mb-2 text-center"
                 animateBy="words"
                 delay={100}
                 direction="top"
@@ -729,7 +730,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-lg  sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4"
           >
             ¿Necesitás un sitio web que realmente convierta visitantes en clientes? Somos especialistas en desarrollo web profesional y marketing digital.
           </motion.p>
@@ -738,7 +739,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1 }}
-            className="text-lg text-gray-500 max-w-2xl mx-auto"
+            className="text-sm xs:text-base sm:text-lg text-gray-500 max-w-2xl mx-auto px-4"
           >
             Más de 8 años transformando negocios con sitios web que venden las 24 horas.
           </motion.div>
@@ -751,16 +752,16 @@ const Hero = () => {
           >
             <button
               onClick={handleCTAClick}
-              className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 xs:px-6 sm:px-8 py-2.5 xs:py-3 sm:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl text-xs xs:text-sm sm:text-base"
             >
               <span className="font-semibold">Descubre nuestros servicios</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </button>          
             <a
               href="https://wa.me/5491134227461"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-white/30 backdrop-blur-sm"
+              className="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 xs:px-6 sm:px-8 py-2.5 xs:py-3 sm:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-white/30 backdrop-blur-sm text-xs xs:text-sm sm:text-base"
             >
               {/* Animated shine effect */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 ease-out"></div>
@@ -771,8 +772,8 @@ const Hero = () => {
                 <div className="absolute inset-0 w-2 h-2 bg-white rounded-full animate-ping"></div>
               </div>
               
-              <MessageCircle className="w-5 h-5 relative z-10" />
-              <span className="font-bold text-lg relative z-10">Consulta GRATIS</span>
+              <MessageCircle className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 relative z-10" />
+              <span className="font-bold text-xs xs:text-sm sm:text-base lg:text-lg relative z-10">Consulta GRATIS</span>
               
               {/* Subtle glow effect */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-300"></div>

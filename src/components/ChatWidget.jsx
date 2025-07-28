@@ -20,9 +20,9 @@ const ChatWidget = () => {
   });
   const [isEmailSending, setIsEmailSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
-  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
-  const messagesEndRef = useRef(null);
+  const [_userHasScrolled, setUserHasScrolled] = useState(false);
   const messagesContainerRef = useRef(null);
+  const lastMessageCountRef = useRef(0);
 
   // EmailJS Configuration - Replace with your credentials
   const EMAILJS_CONFIG = {
@@ -36,35 +36,30 @@ const ChatWidget = () => {
     ? 'http://localhost:3001'                    // Local development
     : 'https://ipaq-tb-looksmart-surgeons.trycloudflare.com';    // Deployed (production)
 
-  const scrollToBottom = () => {
-    if (shouldAutoScroll && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  // Simple scroll to top of new message
+  const scrollToNewMessage = () => {
+    if (messagesContainerRef.current) {
+      const messageElements = messagesContainerRef.current.querySelectorAll('[data-message-id]');
+      if (messageElements.length > 0) {
+        const lastMessage = messageElements[messageElements.length - 1];
+        lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
-  // Check if user is near bottom of scroll area
-  const isNearBottom = () => {
-    if (!messagesContainerRef.current) return true;
-    
-    const container = messagesContainerRef.current;
-    const threshold = 100; // pixels from bottom
-    
-    return (
-      container.scrollHeight - container.scrollTop - container.clientHeight < threshold
-    );
-  };
-
-  // Handle scroll events to determine auto-scroll behavior
+  // Handle user scroll - once they scroll, stop auto-positioning
   const handleScroll = () => {
-    setShouldAutoScroll(isNearBottom());
+    setUserHasScrolled(true);
   };
 
+  // Auto-scroll to new messages - always scroll to beginning of any new message
   useEffect(() => {
-    // Only auto-scroll if user is near the bottom
-    if (shouldAutoScroll) {
-      scrollToBottom();
+    // Always auto-position when new messages are added
+    if (messages.length > lastMessageCountRef.current) {
+      scrollToNewMessage();
+      lastMessageCountRef.current = messages.length;
     }
-  }, [messages, shouldAutoScroll]);
+  }, [messages]);
 
   // Initialize EmailJS
   useEffect(() => {
@@ -112,8 +107,9 @@ const ChatWidget = () => {
         sender: 'bot',
         timestamp: new Date()
       }]);
-      // Reset auto-scroll to true when opening chat
-      setShouldAutoScroll(true);
+      // Reset scroll state when opening chat
+      setUserHasScrolled(false);
+      lastMessageCountRef.current = 1;
     }
   }, [isOpen, messages.length]);
 
@@ -247,8 +243,7 @@ const ChatWidget = () => {
     setInputValue('');
     setIsLoading(true);
 
-    // Auto-scroll when user sends a message
-    setShouldAutoScroll(true);
+    // Don't change scroll behavior when user sends message
 
     try {
       // Get chat history for context
@@ -396,6 +391,7 @@ const ChatWidget = () => {
         {messages.map((message) => (
           <div
             key={message.id}
+            data-message-id={message.id}
             className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
@@ -421,7 +417,7 @@ const ChatWidget = () => {
         ))}
         
         {isLoading && (
-          <div className="flex justify-start">
+          <div data-message-id="loading" className="flex justify-start">
             <div className="bg-gray-100 text-gray-800 p-3 rounded-2xl flex items-center space-x-2">
               <Bot size={16} />
               <Loader2 size={16} className="animate-spin" />
@@ -431,7 +427,7 @@ const ChatWidget = () => {
         )}
 
         {isEmailSending && (
-          <div className="flex justify-start">
+          <div data-message-id="email-sending" className="flex justify-start">
             <div className="bg-blue-100 text-blue-800 p-3 rounded-2xl flex items-center space-x-2">
               <Mail size={16} />
               <Loader2 size={16} className="animate-spin" />
@@ -440,7 +436,7 @@ const ChatWidget = () => {
           </div>
         )}
         
-        <div ref={messagesEndRef} />
+        
       </div>
 
       {/* Input */}
