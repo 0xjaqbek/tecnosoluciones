@@ -20,7 +20,9 @@ const ChatWidget = () => {
   });
   const [isEmailSending, setIsEmailSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
   // EmailJS Configuration - Replace with your credentials
   const EMAILJS_CONFIG = {
@@ -35,12 +37,34 @@ const ChatWidget = () => {
     : 'https://ipaq-tb-looksmart-surgeons.trycloudflare.com';    // Deployed (production)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (shouldAutoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Check if user is near bottom of scroll area
+  const isNearBottom = () => {
+    if (!messagesContainerRef.current) return true;
+    
+    const container = messagesContainerRef.current;
+    const threshold = 100; // pixels from bottom
+    
+    return (
+      container.scrollHeight - container.scrollTop - container.clientHeight < threshold
+    );
+  };
+
+  // Handle scroll events to determine auto-scroll behavior
+  const handleScroll = () => {
+    setShouldAutoScroll(isNearBottom());
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Only auto-scroll if user is near the bottom
+    if (shouldAutoScroll) {
+      scrollToBottom();
+    }
+  }, [messages, shouldAutoScroll]);
 
   // Initialize EmailJS
   useEffect(() => {
@@ -88,6 +112,8 @@ const ChatWidget = () => {
         sender: 'bot',
         timestamp: new Date()
       }]);
+      // Reset auto-scroll to true when opening chat
+      setShouldAutoScroll(true);
     }
   }, [isOpen, messages.length]);
 
@@ -220,6 +246,9 @@ const ChatWidget = () => {
     const currentInput = inputValue;
     setInputValue('');
     setIsLoading(true);
+
+    // Auto-scroll when user sends a message
+    setShouldAutoScroll(true);
 
     try {
       // Get chat history for context
@@ -359,7 +388,11 @@ const ChatWidget = () => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div 
+        ref={messagesContainerRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto p-4 space-y-4"
+      >
         {messages.map((message) => (
           <div
             key={message.id}
