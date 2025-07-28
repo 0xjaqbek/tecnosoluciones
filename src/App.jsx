@@ -855,6 +855,7 @@ const Services = () => {
             <span>Servicios de Desarrollo Web que Generan Resultados</span>
           </div>
           
+          {/* Alternative: More balanced cohesive design */}
           <ScrollReveal
             baseOpacity={0}
             baseY={20}
@@ -863,23 +864,15 @@ const Services = () => {
             enableBlur={true}
             blurStrength={5}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Transformá tu negocio con{' '}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-5xl mx-auto">
+              <span className="text-gray-900">
+                Desarrollo web profesional
+              </span>
+              <br />
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                sitios web profesionales
+                que aumenta tus ventas
               </span>
             </h2>
-          </ScrollReveal>
-          
-          <ScrollReveal
-            baseOpacity={0}
-            baseY={10}
-            duration={0.8}
-            delay={0.4}
-          >
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              que realmente venden
-            </p>
           </ScrollReveal>
         </div>
 
