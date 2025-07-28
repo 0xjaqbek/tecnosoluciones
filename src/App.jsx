@@ -641,7 +641,7 @@ const Header = () => {
                 <span className="text-sm">technosoluciones@gmail.uno</span>
               </div>
               <a
-                href="https://wa.me/5491136227641"
+                href="https://wa.me/5491134227461"
                 onClick={handleWhatsAppClick}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -757,7 +757,7 @@ const Hero = () => {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>          
             <a
-              href="https://wa.me/5491136227641"
+              href="https://wa.me/5491134227461"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-white/30 backdrop-blur-sm"
@@ -1188,7 +1188,7 @@ const SpecialOffer = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
               <a
-                href="https://wa.me/5491136227641?text=Hola! Vi la oferta especial del 15% de descuento y me interesa crear un sitio web profesional para mi negocio"
+                href="https://wa.me/5491134227461?text=Hola! Vi la oferta especial del 15% de descuento y me interesa crear un sitio web profesional para mi negocio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center space-x-3 bg-white text-purple-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
@@ -1240,7 +1240,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://wa.me/5491136227641"
+                href="https://wa.me/5491134227461"
                 onClick={handleWhatsAppClick}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1264,7 +1264,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-green-400 transition-colors"
                 >
-                  +54 9 11 3422 7461
+                  +54 9 113 422 7461
                 </a>
               </div>
               <div className="flex items-center space-x-2">
